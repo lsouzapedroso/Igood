@@ -4,6 +4,7 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\Communication\CommunicationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
@@ -33,6 +34,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', [HomeController::class, 'home']);
 	Route::get('dashboard', [DashboardController::class, 'create'])->name('dashboard');
+    Route::get('communication', [CommunicationController::class, 'index'])->name('communication');
+
+
 	Route::get('dashboardTask', [DashboardController::class, 'geTask'])->name('dashboardGetTask');
 	Route::get('profile', function () {return view('profile');})->name('profile');
 	Route::get('user-management', [InfoUserController::class, 'create'])->name('user-management');
