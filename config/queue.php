@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('QUEUE_CONNECTION', 'sync'),
+    'default' => env('QUEUE_CONNECTION', 'redis'),
 
     /*
     |--------------------------------------------------------------------------
@@ -40,6 +40,7 @@ return [
             'queue' => 'default',
             'retry_after' => 90,
             'after_commit' => false,
+            'workers' => 100,
         ],
 
         'beanstalkd' => [
@@ -68,25 +69,14 @@ return [
             'queue' => env('REDIS_QUEUE', 'default'),
             'retry_after' => 90,
             'block_for' => null,
+            'workers' => 10,
             'after_commit' => false,
         ],
 
-    ],
+        'queues' => [
+            'default',
+        ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Job Batching
-    |--------------------------------------------------------------------------
-    |
-    | The following options configure the database and table that store job
-    | batching information. These options can be updated to any database
-    | connection and table which has been defined by your application.
-    |
-    */
-
-    'batching' => [
-        'database' => env('DB_CONNECTION', 'mysql'),
-        'table' => 'job_batches',
     ],
 
     /*

@@ -44,6 +44,20 @@ return [
         ],
 
         'mysql' => [
+            'read' => [
+                'host' => [
+                    'localhost',
+                    'mysql',
+                    '127.0.0.1',
+                ],
+            ],
+            'write' => [
+                'host' => [
+                    'localhost',
+                    'mysql',
+                    '127.0.0.1',
+                ],
+            ],
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -120,7 +134,6 @@ return [
     */
 
     'redis' => [
-
         'client' => env('REDIS_CLIENT', 'phpredis'),
 
         'options' => [

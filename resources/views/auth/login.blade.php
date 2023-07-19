@@ -1,47 +1,53 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+@extends('layouts.not-logged-layout')
+@section('content')
+<!-- banner -->
+<div class="banner about-banner">
+   <div class="container">
+      <h2>Entrar</h2>
+      <div class="agileits-line"></div>
+   </div>
+</div>
+<!-- //banner -->
+<!-- Login form -->
+<form method="POST" action="" class="form-horizontal">
+    @csrf
+    <fieldset>
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-4">
+                        <p class="alert alert-danger">{{ $error }}</p>
+                    </div>
+                </div>
+            @endforeach
+        @endif
+        <!-- Text input-->
+        <div class="form-group">
+            <div class="col-md-4 col-md-offset-4">
+                <label class="control-label" for="textinput">Login</label>
+                <input id="textinput" name="username" type="text" placeholder="Digite o nome do Usuário"
+                    class="form-control" required>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <!-- Password input-->
+        <div class="form-group">
+            <div class="col-md-4 col-md-offset-4">
+                <label class="control-label" for="passwordinput">Senha</label>
+                <input id="passwordinput" name="password" type="password" placeholder="Digite sua senha"
+                    class="form-control" required>
+            </div>
         </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
+        <!-- Submit button -->
+        <div class="col-md-4 col-md-offset-4">
+            <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary">Entrar</button>
         </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ml-3">
-                {{ __('Log in') }}
-            </x-primary-button>
+        <div class="col-md-4 col-md-offset-4 text-center">
+            <a href="">Esqueceu sua senha?</a>
         </div>
-    </form>
-</x-guest-layout>
+        <div class="col-md-4 col-md-offset-4 text-center">
+            <a href="{{ route('register') }}">Registre-se</a> 
+        </div> 
+    </fieldset>
+</form>
+<!-- //Login form -->
+@endsection
