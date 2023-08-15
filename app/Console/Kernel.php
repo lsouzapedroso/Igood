@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             Log::info('Tarefa agendada SendWhatsappMessagesController@send executada em: ' . now());
             app('App\Http\Controllers\Communication\Whatsapp\SendWhatsappMessagesController')->send();
-        })->everyMinute();
+        })->everyThirtyMinutes();
     }
 
     /**
