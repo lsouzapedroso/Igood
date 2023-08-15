@@ -4,10 +4,10 @@ namespace App\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-    class ApiSponte extends Facade
+class ApiSponte extends Facade
+{
+    protected static function getFacadeAccessor()
     {
-            protected static function getFacadeAccessor()
-            {
-                return 'api-sponte';
-            }
+        return 'api-sponte';
     }
+}

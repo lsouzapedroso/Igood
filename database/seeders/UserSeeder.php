@@ -18,9 +18,8 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'id' => 1,
             'name' => 'admin',
-            'age' => '1985-06-20',
-            'email' => 'admin@softui.com',
-            'password' => Hash::make('secret'),
+            'email' => 'luiz@ccbeuguarapuava.com.br',
+            'password' => Hash::make('1234'),
             'admin' => true,
             'created_at' => now(),
             'updated_at' => now()
@@ -28,15 +27,9 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'id' => 2,
             'name' => 'Maria',
-            'age' => '1995-05-15',
             'email' => 'maria@example.com',
             'password' => Hash::make('abcdef'),
             'admin' => false,
-        ]);
-        DB::table('children')->insert([
-            'points' => 0,
-            'user_children_id' => 2,
-            'parent_id' => 1,
         ]);
     }
 }

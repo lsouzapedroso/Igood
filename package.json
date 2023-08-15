@@ -1,18 +1,37 @@
 {
-    "private": true,
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build"
-    },
-    "devDependencies": {
-        "@tailwindcss/forms": "^0.5.2",
-        "alpinejs": "^3.4.2",
-        "autoprefixer": "^10.4.2",
-        "axios": "^0.25",
-        "laravel-vite-plugin": "^0.2.1",
-        "lodash": "^4.17.19",
-        "postcss": "^8.4.6",
-        "tailwindcss": "^3.1.0",
-        "vite": "^2.9.11"
-    }
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.2",
+    "alpinejs": "^3.4.2",
+    "autoprefixer": "^10.4.2",
+    "axios": "^0.25",
+    "bootstrap": "^5.0.0",
+    "laravel-mix": "^6.0.49",
+    "laravel-vite-plugin": "^0.2.1",
+    "lodash": "^4.17.19",
+    "postcss": "^8.4.6",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.64.2",
+    "sass-loader": "^12.6.0",
+    "tailwindcss": "^3.1.0",
+    "vite": "^2.9.11"
+  },
+  "dependencies": {
+    "moment": "^2.29.4",
+    "tempusdominus-bootstrap-4": "^5.39.2"
+  },
+  "name": "front-guide",
+  "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\"></a></p>",
+  "version": "1.0.0",
+  "main": "postcss.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

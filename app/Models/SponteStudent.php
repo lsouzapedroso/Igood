@@ -44,6 +44,6 @@ class SponteStudent extends Model
 
     public function situation()
     {
-        return $this->belongsTo(Situation::class);
+        return $this->belongsTo(classSituation::class);
     }
 }
