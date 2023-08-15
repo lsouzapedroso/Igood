@@ -16,4 +16,15 @@ class ResponsibleStudents extends Model
     'name',
     'student_id'
     ];
+
+    public function responsible()
+    {
+        return $this->belongsTo(SponteResponsibles::class, 'responsible_id');
+    }
+
+    public function student()
+    {
+        return $this->belongsTo(SponteStudent::class, 'student_id');
+    }
+
 }

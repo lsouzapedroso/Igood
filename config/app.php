@@ -195,7 +195,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\HorizonServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        \App\Providers\ApiSponteProvider::class,
+        App\Providers\ApiSponteProvider::class,
 
     ],
 
@@ -209,6 +209,7 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
+    'Wppconnect' => WPPConnectTeam\Wppconnect\Facades\Wppconnect::class,
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,

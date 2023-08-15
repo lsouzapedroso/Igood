@@ -9,6 +9,7 @@ class DashboardController extends Controller
 {
     public function create(){
         $user = auth()->user();
-        return view('dashboard');
+        $accessLevel = $user->access_level;
+        return view('dashboard', compact('accessLevel') );
     }
 }

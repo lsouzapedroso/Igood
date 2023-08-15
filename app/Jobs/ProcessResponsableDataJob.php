@@ -3,13 +3,8 @@
 namespace App\Jobs;
 
 use App\Http\Requests\SponteRequest;
-use App\Models\ClassMember;
-use App\Models\ClassRegistration;
-use App\Models\ClassSituations;
 use App\Models\ResponsibleStudents;
-use App\Models\SponteClassesAll;
 use App\Models\SponteResponsibles;
-use App\Models\SponteResponsiblesAll;
 use App\Models\SponteStudent;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -18,6 +13,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Redis;
+
 
 class ProcessResponsableDataJob implements ShouldQueue
 {

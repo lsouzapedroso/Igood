@@ -5,6 +5,11 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\Communication\CommunicationController;
+use App\Http\Controllers\Communication\phonebook\PhonebookController;
+use App\Http\Controllers\Communication\Whatsapp\GroupsContoller;
+use App\Http\Controllers\Communication\Whatsapp\MessagesController;
+use App\Http\Controllers\Communication\Whatsapp\SendWhatsappMessagesController;
+use App\Http\Controllers\Communication\Whatsapp\WhatsappController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
@@ -13,9 +18,7 @@ use App\Http\Controllers\SponteContollers\SponteClassesController;
 use App\Http\Controllers\SponteContollers\SponteEmployeesController;
 use App\Http\Controllers\SponteContollers\SponteResponsiblesController;
 use App\Http\Controllers\SponteContollers\SponteStudentsController;
-use App\Http\Controllers\Verificar\GratificationController;
 use App\Http\Controllers\Verificar\SessionsController;
-use App\Http\Controllers\Verificar\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,47 +31,79 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware' => 'access.level:0'], function () {
+    Route::get('/dashboard', [DashboardController::class, 'create'])->name('dashboard');
 
-//Soft-ui
-Route::group(['middleware' => 'auth'], function () {
-
-    Route::get('/', [HomeController::class, 'home']);
-	Route::get('dashboard', [DashboardController::class, 'create'])->name('dashboard');
-    Route::get('communication', [CommunicationController::class, 'index'])->name('communication');
+    Route::get('/communication', [CommunicationController::class, 'index'])->name('communication');
+    Route::get('/phonebook-options', [PhonebookController::class, 'index'])->name('phonebook-options');
+    Route::post('/update-student/{id}', [PhonebookController::class, 'update'])->name('update-student');
 
 
-	Route::get('dashboardTask', [DashboardController::class, 'geTask'])->name('dashboardGetTask');
-	Route::get('profile', function () {return view('profile');})->name('profile');
-	Route::get('user-management', [InfoUserController::class, 'create'])->name('user-management');
-	Route::get('tables', function () {return view('tables');})->name('tables');
-    Route::get('static-sign-in', function () {return view('static-sign-in');})->name('sign-in');
-    Route::get('static-sign-up', function () {return view('static-sign-up');})->name('sign-up');
+    Route::get('/groups-message', [GroupsContoller::class, 'index'])->name('groups-message');
+    Route::get('/edit-groups-message/{id}', [GroupsContoller::class, 'edit'])->name('edit-groups-message');
+    Route::post('/update-groups-message/{id}', [GroupsContoller::class, 'update'])->name('update-groups-message');
+
+    Route::get('/edit-message/{id}', [MessagesController::class, 'edit'])->name('edit-message');
+    Route::post('/update-message/{id}', [MessagesController::class, 'update'])->name('update-message');
+    Route::get('/destroy-message/{id}', [MessagesController::class, 'destroy'])->name('destroy-message');
+
+    Route::get('/new-message', [MessagesController::class, 'index'])->name('new-message');
+    Route::post('/message-save', [MessagesController::class, 'store'])->name('message-save');
+    Route::get('/create-message', [MessagesController::class, 'index'])->name('create-message');
+    Route::post('/save-message', [MessagesController::class, 'saveMassage'])->name('save-message');
+
+    Route::get('/whatsapp-options', [WhatsappController::class, 'index'])->name('whatsapp-options');
+    Route::get('/whatsapp-create', [WhatsappController::class, 'create'])->name('whatsapp-create');
+    Route::get('/whatsapp-check', [WhatsappController::class, 'check'])->name('whatsapp-check');
+
+
+    Route::get('profile', function () {return view('profile');})->name('profile');
+    Route::get('user-management', [InfoUserController::class, 'create'])->name('user-management');
+
     Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-	Route::get('/user-profile', [InfoUserController::class, 'create']);
-	Route::post('/user-profile', [InfoUserController::class, 'store']);
-    Route::get('/login', function () {return view('dashboard');})->name('sign-up');
-
-	Route::get('/create-task', [TaskController::class, 'create'])->name('create-task');
-	Route::get('/add-task', [TaskController::class, 'add'])->name('add-task');
-	Route::get('/edit-task/{id}', [TaskController::class, 'edit'])->name('edit-task');
-	Route::post('/update-task/{id}', [TaskController::class, 'update'])->name('update-task');
-	Route::get('/delete-task/{id}', [TaskController::class, 'delete'])->name('delete-task');
-	Route::post('/task-store', [TaskController::class, 'store'])->name('task-store');
-
-	Route::get('/create-gratification', [GratificationController::class, 'create'])->name('create-gratification');
-	Route::post('/gratification-store', [GratificationController::class, 'store'])->name('gratification-store');
-    Route::get('/add-gratification', [GratificationController::class, 'add'])->name('add-gratification');
-	Route::get('/edit-gratification/{id}', [GratificationController::class, 'edit'])->name('edit-gratification');
-	Route::post('/update-gratification/{id}', [GratificationController::class, 'update'])->name('update-gratification');
-	Route::get('/delete-gratification/{id}', [GratificationController::class, 'delete'])->name('delete-gratification');
-	Route::get('/rasom-gratification/{id}', [GratificationController::class, 'rasom'])->name('rasom-gratification');
-
-});
-
-Route::group(['middleware' => 'guest'], function () {
+    Route::get('/user-profile', [InfoUserController::class, 'create']);
+    Route::post('/user-profile', [InfoUserController::class, 'store']);
     Route::get('/register', [RegisteredUserController::class, 'create']);
     Route::post('/register', [RegisteredUserController::class, 'store']);
-    Route::get('/login', [SessionsController::class, 'create']);
+
+    Route::get('/classes', [SponteClassesController::class, 'newSearch']);
+    Route::get('/classes-store', [SponteClassesController::class, 'store']);
+    Route::get('/employees', [SponteEmployeesController::class, 'newSearch']);
+    Route::get('/employees-store', [SponteEmployeesController::class, 'store']);
+    Route::get('/student', [SponteStudentsController::class, 'store']);
+    Route::get('/responsibles', [SponteResponsiblesController::class, 'newSearch']);
+    Route::get('/responsibles-store', [SponteResponsiblesController::class, 'store']);
+    Route::get('/send-message', [SendWhatsappMessagesController::class, 'send']);
+});
+
+Route::group(['middleware' => 'access.level:1'], function () {
+
+    Route::get('/groups-message', [GroupsContoller::class, 'index'])->name('groups-message');
+    Route::get('/edit-groups-message/{id}', [GroupsContoller::class, 'edit'])->name('edit-groups-message');
+    Route::post('/update-groups-message/{id}', [GroupsContoller::class, 'update'])->name('update-groups-message');
+
+    Route::get('/edit-message/{id}', [MessagesController::class, 'edit'])->name('edit-message');
+    Route::post('/update-message/{id}', [MessagesController::class, 'update'])->name('update-message');
+    Route::get('/destroy-message/{id}', [MessagesController::class, 'destroy'])->name('destroy-message');
+
+    Route::get('/new-message', [MessagesController::class, 'index'])->name('new-message');
+    Route::post('/message-save', [MessagesController::class, 'store'])->name('message-save');
+    Route::get('/create-message', [MessagesController::class, 'index'])->name('create-message');
+    Route::post('/save-message', [MessagesController::class, 'saveMassage'])->name('save-message');
+
+    Route::get('/whatsapp-options', [WhatsappController::class, 'index'])->name('whatsapp-options');
+    Route::get('/whatsapp-create', [WhatsappController::class, 'create'])->name('whatsapp-create');
+    Route::get('/whatsapp-check', [WhatsappController::class, 'check'])->name('whatsapp-check');
+
+    Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+    Route::get('/dashboard', [DashboardController::class, 'create'])->name('dashboard');
+});
+
+Route::get('/', [HomeController::class, 'home']);
+
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/', [HomeController::class, 'home']);
+    Route::get('/login', [SessionsController::class, 'create'])->name('login');
     Route::post('/session', [SessionsController::class, 'store'])->name('session');
 	Route::get('/login/forgot-password', [ResetController::class, 'create']);
 	Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
@@ -77,11 +112,7 @@ Route::group(['middleware' => 'guest'], function () {
 
 });
 
-Route::get('/login', function () {return view('session/login-session');})->name('login');
-Route::get('/classes', [SponteClassesController::class, 'newSearch']);
-Route::get('/classes-store', [SponteClassesController::class, 'store']);
-Route::get('/employees', [SponteEmployeesController::class, 'newSearch']);
-Route::get('/employees-store', [SponteEmployeesController::class, 'store']);
-Route::get('/student', [SponteStudentsController::class, 'store']);
-Route::get('/responsibles', [SponteResponsiblesController::class, 'newSearch']);
-Route::get('/responsibles-store', [SponteResponsiblesController::class, 'store']);
+
+Route::group(['middleware' => 'auth'], function () {
+    //EXCLUIR
+});

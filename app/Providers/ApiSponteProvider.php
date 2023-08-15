@@ -22,7 +22,7 @@ class ApiSponteProvider extends ServiceProvider
             ])->withHeaders([
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
-                'api_key' => '8D7034',
+                'api_key' => env('API_SPONTE'),
                 'stream' => true,
                 'version' => '1.0',
             ]);

@@ -19,16 +19,28 @@ class SessionsController extends Controller
             'email'=>'required|email',
             'password'=>'required'
         ]);
-
-        if(Auth::attempt($attributes))
-        {
+        if (Auth::attempt($attributes)) {
+            $user = Auth::user();
             session()->regenerate();
-            return redirect('dashboard')->with(['success'=>'You are logged in.']);
-        }
-        else{
 
-            return back()->withErrors(['email'=>'Email or password invalid.']);
+            if ($user->access_level === 0) {
+                return redirect('dashboard'); // Rota para administração
+            } else {
+                return redirect('dashboard'); // Rota padrão de usuário
+            }
+        } else {
+            return back()->withErrors(['email' => 'Email or password invalid.']);
         }
+
+//        if(Auth::attempt($attributes))
+//        {
+//            session()->regenerate();
+//            return redirect('dashboard');
+//        }
+//        else{
+//
+//            return back()->withErrors(['email'=>'Email or password invalid.']);
+//        }
     }
 
     public function destroy()
