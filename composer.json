@@ -17,6 +17,7 @@
         "wppconnect-team/wppconnect-laravel-client": "^1.0"
     },
     "require-dev": {
+        "deployer/deployer": "^7.3",
         "fakerphp/faker": "^1.9.1",
         "laravel/breeze": "^1.11",
         "laravel/sail": "^1.21",

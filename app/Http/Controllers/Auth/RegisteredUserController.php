@@ -33,6 +33,8 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        $user = auth()->user();
+        $accessLevel = $user->access_level;
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -49,6 +51,6 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-        return redirect('/register');
+        return redirect('/register',compact('accessLevel'));
     }
 }
