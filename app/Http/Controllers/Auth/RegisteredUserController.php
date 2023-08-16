@@ -20,7 +20,9 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('session.register');
+        $user = auth()->user();
+        $accessLevel = $user->access_level;
+        return view('session.register',compact('accessLevel'));
     }
 
     /**
