@@ -10,13 +10,13 @@ return [
 		 * Configures a base URL for the client so that requests created using a relative URL are combined with the base_url
 		 * See: http://guzzle.readthedocs.org/en/latest/quickstart.html#creating-a-client
 		 */
-		'base_uri' => 'http://192.168.1.6:21465',
+		'base_uri' => env('WPP_URL'),
 
 		/**
 		 * Secret Key
 		 * See: https://github.com/wppconnect-team/wppconnect-server#secret-key
 		 */
-		'secret_key' => 'THISISMYSECURETOKEN'
+		'secret_key' => env('WPP_KEY')
 	]
 
 ];
