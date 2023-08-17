@@ -10,7 +10,7 @@
 
             <div class="form-group">
                 <label for="datetimepicker">Selecione a data e hora:</label>
-                <div class="input-group date" id="datetimepicker" data-target-input="nearest">
+                <div class="input-group date " id="datetimepicker" data-target-input="nearest">
                     <input type="text" class="form-control datetimepicker-input"
                            data-target="#datetimepicker" name="day_time" placeholder="Data e hora"/>
                     <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
@@ -40,26 +40,4 @@
             </div>
         </form>
     </div>
-
-    <script>
-
-        jQuery.datetimepicker.setLocale('pt-BR');
-        $('#datetimepicker').datetimepicker({
-            timepicker: true,
-            format: 'd/m/Y H:i'
-        });
-
-        function validateForm() {
-            var name = document.getElementsByName('name')[0].value;
-            var dataHora = document.getElementsByName('data_hora')[0].value;
-            var mensagem = document.getElementsByName('mensagem')[0].value;
-
-            if (name.trim() === '' || dataHora.trim() === '' || mensagem.trim() === '') {
-                alert('Preencha todos os campos obrigatórios antes de enviar o formulário.');
-                return false;
-            }
-
-            return true;
-        }
-    </script>
 @endsection
