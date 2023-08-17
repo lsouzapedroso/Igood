@@ -42,7 +42,7 @@
     </div>
 
     <script>
-        
+
         jQuery.datetimepicker.setLocale('pt-BR');
         $('#datetimepicker').datetimepicker({
             timepicker: true,
