@@ -2,9 +2,8 @@
 @section('content')
     <div class="card-body px-10 pt-0 pb-2">
 
-        <form role="form" method="POST" action="{{ route('message-save') }}" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <form role="form" method="POST" action="/message-save" enctype="multipart/form-data" onsubmit="return validateForm()">
             @csrf
-
             <div class="form-group">
                 <input type="text" class="form-control" name="name" value="" placeholder="Nome">
             </div>
