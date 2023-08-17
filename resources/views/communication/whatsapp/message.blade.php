@@ -42,10 +42,13 @@
     </div>
 
     <script>
-        $('#datetimepicker').datetimepicker({
-            format: 'DD/MM/YYYY HH:mm',
-        });
         
+        jQuery.datetimepicker.setLocale('pt-BR');
+        $('#datetimepicker').datetimepicker({
+            timepicker: true,
+            format: 'd/m/Y H:i'
+        });
+
         function validateForm() {
             var name = document.getElementsByName('name')[0].value;
             var dataHora = document.getElementsByName('data_hora')[0].value;
