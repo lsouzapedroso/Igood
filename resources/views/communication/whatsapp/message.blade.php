@@ -42,6 +42,10 @@
     </div>
 
     <script>
+        $('#datetimepicker').datetimepicker({
+            format: 'DD/MM/YYYY HH:mm',
+        });
+        
         function validateForm() {
             var name = document.getElementsByName('name')[0].value;
             var dataHora = document.getElementsByName('data_hora')[0].value;
