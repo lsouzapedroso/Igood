@@ -11,7 +11,7 @@ $(document).ready(function () {
     dateTimePickerField.datetimepicker({
         locale: 'pt-br',
         format: 'DD-MM-YYYY HH:mm',
-        useCurrent: false, // Evita que o valor atual seja preenchido automaticamente
+        useCurrent: false,
         icons: {
             time: 'fa fa-clock',
             date: 'fa fa-calendar',
