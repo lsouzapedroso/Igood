@@ -19,6 +19,7 @@ use App\Http\Controllers\SponteContollers\SponteEmployeesController;
 use App\Http\Controllers\SponteContollers\SponteResponsiblesController;
 use App\Http\Controllers\SponteContollers\SponteStudentsController;
 use App\Http\Controllers\Verificar\SessionsController;
+use http\Url;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+if (env('APP_ENV') === 'production') {
+    URL::forceSchema('https');
+}
+
 Route::group(['middleware' => 'access.level:0'], function () {
     Route::get('/dashboard', [DashboardController::class, 'create'])->name('dashboard');
 
