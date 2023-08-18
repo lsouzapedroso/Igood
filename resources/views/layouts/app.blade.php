@@ -92,7 +92,7 @@
             // Inicializa o plugin Tempus Dominus no campo de input
             dateTimePickerField.datetimepicker({
                 locale: 'pt-br',
-                format: 'MM-DD-YYYY HH:mm',
+                format: 'YYYY-MM-DD HH:mm',
                 useCurrent: false,
                 icons: {
                     time: 'fa fa-clock',
