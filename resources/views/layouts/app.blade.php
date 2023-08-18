@@ -15,10 +15,7 @@
 -->
 <!DOCTYPE html>
 
-@if (\Request::is('groups-message'))
-    <html lang="pt-BR">
-    @endif
-
+    <html lang="pt-br">
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
