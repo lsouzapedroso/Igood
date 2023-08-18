@@ -32,12 +32,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-if (env('APP_ENV') === 'production') {
-    URL::forceSchema('https');
-}
-
 Route::group(['middleware' => 'access.level:0'], function () {
+
+    if (env('APP_ENV') === 'production') {
+        URL::forceSchema('https');
+    }
+
     Route::get('/dashboard', [DashboardController::class, 'create'])->name('dashboard');
 
     Route::get('/communication', [CommunicationController::class, 'index'])->name('communication');
