@@ -80,6 +80,7 @@ class MessagesController extends Controller
 
     public function saveMassage(Request $request)
     {
+
         $selectedGroups = $request->input('selected_groups');
         $newMessageId = $request->input('new_message_id');
         $service = WppconnectService::where('service_name', $this->session)->first();

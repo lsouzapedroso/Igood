@@ -103,6 +103,7 @@ Route::group(['middleware' => 'access.level:1'], function () {
 
     Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'create'])->name('dashboard');
+    Route::get('/send-message', [SendWhatsappMessagesController::class, 'send']);
 });
 
 Route::get('/', [HomeController::class, 'home']);

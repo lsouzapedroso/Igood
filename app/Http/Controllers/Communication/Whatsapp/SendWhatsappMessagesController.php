@@ -76,5 +76,6 @@ class SendWhatsappMessagesController extends Controller
                 }
             }
         }
+        return redirect()->route ('groups-message');
     }
 }

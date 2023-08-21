@@ -6,6 +6,11 @@
         type="button"
         class="btn bg-gradient-primary">Nova Mensagem
     </a>
+    <a
+        href="{{ url('send-message')}}"
+        type="button"
+        class="btn bg-gradient-primary">Enviar
+    </a>
     <div class="card-body px-0 pt-0 pb-2">
         <div class="table-responsive p-0">
             <form role="form" method="POST" action="{{ route('save-message') }}" onsubmit="return validateForm()">
