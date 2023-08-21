@@ -2,7 +2,7 @@
 @section('content')
     <div class="card-body px-0 pt-0 pb-2">
         <div class="table-responsive p-0">
-            <form role="form" method="POST" action="{{ route('save-message') }}" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <form role="form" method="POST" action="'/save-message" enctype="multipart/form-data" onsubmit="return validateForm()">
                 @csrf
                 <input type="hidden" name="new_message_id" value="{{ $MessageId }}">
                 <table class="table align-items-center mb-5">
