@@ -48,7 +48,7 @@ class SponteClassesController extends Controller
                     if (isset($item['time'])) {
                         $time = $item['time'];
                     }
-                    dd($modalidadeId);
+
                     SponteClassesAll::create([
                         "class_id" => $classId,
                         "name" => $name,
