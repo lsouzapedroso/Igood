@@ -26,7 +26,7 @@ class SponteClassesController extends Controller
 
             if (isset($item['modalidade_id'])) {
             $modality = $item['modalidade_id'];
-            dd('setou;'$modality );
+            dd($modality);
             }
             dd('não setou');
             if ((in_array($situation, $situationToSave)) && (in_array($modality, $modalityToSave))) {
