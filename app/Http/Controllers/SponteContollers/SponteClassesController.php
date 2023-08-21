@@ -27,7 +27,7 @@ class SponteClassesController extends Controller
                 continue;
             } else {
                 $modality = $item['modalidade_id'];
-                dd($modality);
+
                 if ((in_array($situation, $situationToSave)) && (in_array($modality, $modalityToSave))) {
 
                     if (isset($item['class_id'])) {
@@ -48,7 +48,7 @@ class SponteClassesController extends Controller
                     if (isset($item['time'])) {
                         $time = $item['time'];
                     }
-
+                    dd($modalidadeId);
                     SponteClassesAll::create([
                         "class_id" => $classId,
                         "name" => $name,
