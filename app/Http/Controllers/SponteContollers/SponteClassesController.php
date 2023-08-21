@@ -19,13 +19,13 @@ class SponteClassesController extends Controller
         $classes = $request->getClasses();
         $situationToSave = [1, 3];
         $modalityToSave = [2,7];
-        
+
         foreach ($classes as $item) {
             $situation = $item['situation'];
 
-            if (isset($item['modalidade_id'])) {
+//            if (isset($item['modalidade_id'])) {
             $modality = $item['modalidade_id'];
-            }
+//            }
 
             if ((in_array($situation, $situationToSave)) && (in_array($modality, $modalityToSave))) {
 
