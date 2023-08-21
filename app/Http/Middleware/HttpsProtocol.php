@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class RedirectHttps
+class HttpsProtocol
 {
     /**
      * Handle an incoming request.
@@ -14,13 +14,14 @@ class RedirectHttps
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->secure() && env('APP_ENV') === 'dev')
-        {
+        if (!$request->secure()) {
+
             return redirect()->secure($request->getRequestUri());
+
         }
+
         return $next($request);
     }
 }
