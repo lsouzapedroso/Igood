@@ -23,12 +23,12 @@ class SponteClassesController extends Controller
         foreach ($classes as $item) {
 
             $situation = $item['situation'];
-            dd($situation);
 
             if (isset($item['modalidade_id'])) {
             $modality = $item['modalidade_id'];
+            dd('setou;'$modality );
             }
-
+            dd('não setou');
             if ((in_array($situation, $situationToSave)) && (in_array($modality, $modalityToSave))) {
 
                     if (isset($item['class_id'])) {
