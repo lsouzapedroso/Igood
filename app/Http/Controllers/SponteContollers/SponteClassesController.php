@@ -21,8 +21,9 @@ class SponteClassesController extends Controller
         $modalityToSave = [2,7];
 
         foreach ($classes as $item) {
-            dd($item);
+
             $situation = $item['situation'];
+            dd($situation);
 
             if (isset($item['modalidade_id'])) {
             $modality = $item['modalidade_id'];
