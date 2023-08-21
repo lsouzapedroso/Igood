@@ -21,15 +21,11 @@ class SponteClassesController extends Controller
         $modalityToSave = [2,7];
 
         foreach ($classes as $item) {
-
             $situation = $item['situation'];
-
             if (isset($item['modalidade_id'])) {
-            $modality = $item['modalidade_id'];
-            dd($modality);
-            }
-            dd('não setou');
-            if ((in_array($situation, $situationToSave)) && (in_array($modality, $modalityToSave))) {
+                $modality = $item['modalidade_id'];
+
+                if ((in_array($situation, $situationToSave)) && (in_array($modality, $modalityToSave))) {
 
                     if (isset($item['class_id'])) {
                         $classId = $item['class_id'];
@@ -59,7 +55,7 @@ class SponteClassesController extends Controller
                         "time" => $time,
                         "check" => false,
                     ]);
-
+                }
             }
         }
         dd('ok');
