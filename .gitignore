@@ -16,3 +16,4 @@ yarn-error.log
 *.pdf
 *.png
 *.png
+public/output.png
