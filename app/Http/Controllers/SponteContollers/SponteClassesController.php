@@ -18,48 +18,47 @@ class SponteClassesController extends Controller
         $request = new SponteRequest();
         $classes = $request->getClasses();
         $situationToSave = [1, 3];
-        $modalityToSave = [2,7];
+        $modalityToSave = [2, 7];
 
         foreach ($classes as $item) {
             $situation = $item['situation'];
-            if (isset($item['modalidade_id'])) {
-                $modality = $item['modalidade_id'];
+            $modality = $item['modalidade_id'];
 
-                if ((in_array($situation, $situationToSave)) && (in_array($modality, $modalityToSave))) {
+            if ((in_array($situation, $situationToSave)) && (in_array($modality, $modalityToSave))) {
 
-                    if (isset($item['class_id'])) {
-                        $classId = $item['class_id'];
-                    }
-                    if (isset($item['name'])) {
-                        $name = $item['name'];
-                    }
-                    if (isset($item['situation'])) {
-                        $situation = $item['situation'];
-                    }
-                    if (isset($item['modalidade_id'])) {
-                        $modalidadeId = $item['modalidade_id'];
-                    }
-                    if (isset($item['modalidade'])) {
-                        $modalidade = $item['modalidade'];
-                    }
-                    if (isset($item['time'])) {
-                        $time = $item['time'];
-                    }
-
-                    $SponteClassesAll = SponteClassesAll::create([
-                        "class_id" => $classId,
-                        "name" => $name,
-                        "situation" => $situation,
-                        "modalidade_id" => $modalidadeId,
-                        "modalidade" => $modalidade,
-                        "time" => $time,
-                        "check" => false,
-                    ]);
+                if (isset($item['class_id'])) {
+                    $classId = $item['class_id'];
                 }
+                if (isset($item['name'])) {
+                    $name = $item['name'];
+                }
+                if (isset($item['situation'])) {
+                    $situation = $item['situation'];
+                }
+                if (isset($item['modalidade_id'])) {
+                    $modalidadeId = $item['modalidade_id'];
+                }
+                if (isset($item['modalidade'])) {
+                    $modalidade = $item['modalidade'];
+                }
+                if (isset($item['time'])) {
+                    $time = $item['time'];
+                }
+
+                $SponteClassesAll = SponteClassesAll::create([
+                    "class_id" => $classId,
+                    "name" => $name,
+                    "situation" => $situation,
+                    "modalidade_id" => $modalidadeId,
+                    "modalidade" => $modalidade,
+                    "time" => $time,
+                    "check" => false,
+                ]);
             }
         }
         dd('ok');
     }
+
     public function store()
     {
         $classes = SponteClassesAll::all();
@@ -71,9 +70,8 @@ class SponteClassesController extends Controller
 
         $request = new SponteRequest();
 
-        foreach ($classes as $class)
-        {
-            $classId = $class ->class_id;
+        foreach ($classes as $class) {
+            $classId = $class->class_id;
             $data = $request->postSearch($classId);
 
             $responseData = SponteClasses::create([
@@ -105,7 +103,7 @@ class SponteClassesController extends Controller
                 ]);
             }
         }
-    dd('ok-store');
+        dd('ok-store');
     }
 }
 
