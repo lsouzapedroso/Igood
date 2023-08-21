@@ -1,8 +1,8 @@
-@extends('layouts.user_type.auth')
+@extends('layouts.user_type.axuth')
 @section('content')
     <div class="card-body px-10 pt-0 pb-2">
 
-        <form role="form" method="POST" action="{{ route('update-message',['id' => $Message->id]) }}" enctype="multipart/form-data" onsubmit="return validateForm()">
+        <form role="form" method="POST" action="/update-message/{{$Message->id}}" enctype="multipart/form-data" onsubmit="return validateForm()">
             @csrf
             <input type="hidden" name="id" value="{{ $Message->id }}">
             <div class="form-group">
