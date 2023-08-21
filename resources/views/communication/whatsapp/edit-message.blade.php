@@ -1,4 +1,4 @@
-@extends('layouts.user_type.axuth')
+@extends('layouts.user_type.auth')
 @section('content')
     <div class="card-body px-10 pt-0 pb-2">
 
