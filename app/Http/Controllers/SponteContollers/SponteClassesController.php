@@ -4,6 +4,7 @@ namespace App\Http\Controllers\SponteContollers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SponteRequest;
+use App\Jobs\ProcessSponteClassesJob;
 use App\Models\ClassMember;
 use App\Models\ClassSchedule;
 use App\Models\SponteClasses;
@@ -78,36 +79,7 @@ class SponteClassesController extends Controller
 
         foreach ($classes as $class) {
             $classId = $class->class_id;
-            $data = $request->postSearch($classId);
-
-            $responseData = SponteClasses::create([
-                'class_id' => $data['class_id'],
-                'name' => $data['name'],
-                'professor_id' => $data['professor_id'],
-                'professor_name' => $data['professor_name'],
-                'capacity' => $data['capacity'],
-                'semester' => $data['semester'],
-                'time' => $data['time'],
-            ]);
-            $membersData = $data['members'];
-            foreach ($membersData as $memberData) {
-                $memberData = ClassMember::create([
-                    'class_id' => $data['class_id'],
-                    'student_id' => $memberData['student_id'],
-                    'start_date' => $memberData['start_date'],
-                ]);
-            }
-            $scheduleData = $data['schedule'];
-            foreach ($scheduleData as $schedule) {
-                $schedule = ClassSchedule::create([
-                    'class_id' => $data['class_id'],
-                    'schedule_date' => $schedule['schedule_date'],
-                    'lesson' => $schedule['lesson'],
-                    'phase' => $schedule['phase'],
-                    'professor' => $schedule['professor'],
-                    'situation' => $schedule['situation'],
-                ]);
-            }
+            ProcessSponteClassesJob::dispatch($classId);
         }
         dd('ok-store');
     }
