@@ -38,7 +38,7 @@ class ProcessSponteClassesJob implements ShouldQueue
      */
     public function handle()
     {
-        $data =  $this->request->postSearch($this->classId);
+        $data = $this->request->postSearch($this->classId);
 
 
         SponteClasses::create([
