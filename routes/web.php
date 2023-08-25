@@ -104,6 +104,7 @@ Route::group(['middleware' => 'access.level:1'], function () {
     Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'create'])->name('dashboard');
     Route::get('/send-message', [SendWhatsappMessagesController::class, 'send']);
+
 });
 
 Route::get('/', [HomeController::class, 'home']);
@@ -112,10 +113,10 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/', [HomeController::class, 'home']);
     Route::get('/login', [SessionsController::class, 'create'])->name('login');
     Route::post('/session', [SessionsController::class, 'store'])->name('session');
-	Route::get('/login/forgot-password', [ResetController::class, 'create']);
-	Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
-	Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
-	Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
+    Route::get('/login/forgot-password', [ResetController::class, 'create']);
+    Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
+    Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
+    Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 
 });
 

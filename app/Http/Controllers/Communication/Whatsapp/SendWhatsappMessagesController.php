@@ -64,7 +64,6 @@ class SendWhatsappMessagesController extends Controller
                     if ($timeTosend <= $currentDateTime) {
                         if ($sessionToken != null && $sessionToken->init == 1) {
                             $data = [
-
                                 'messageId' => $message_id,
                                 'groupId' => $groupId,
                                 'groupMessageId'=> $groupMessageId

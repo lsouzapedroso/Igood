@@ -23,7 +23,7 @@ class SponteEmployeesController extends Controller
             if (isset($employee['name'])) {
                 $name = $employee['name'];
             }
-            $SponteEmployeesAll = SponteEmployeesAll::create([
+            SponteEmployeesAll::create([
                     "employee_id" => $employeeId,
                     "name" => $name,
             ]);
