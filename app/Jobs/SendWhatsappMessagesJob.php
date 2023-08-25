@@ -64,13 +64,11 @@ class SendWhatsappMessagesJob implements ShouldQueue
         $sessionToken = WppconnectToken::where('session_id', $serviceId)->first();
         $messages = Message::where('id', $messageId)->first();
         $phone = WppconnectGroups::where('id',$groupId)->first();
-        $teste = WppconnectGroups::all();
-        Log::info($phone);
-        Log::info($messages);
-        Log::info($teste);
-//        $serializedId = $phone->serialized_id;
-//        $messagesToSend = $messages->message;
-//
+        $serializedId = $phone->serialized_id;
+        $messagesToSend = $messages->message;
+
+        Log::info($serializedId);
+
 //        Wppconnect::make($this->url);
 //        $response = Wppconnect::to('/api/' . $this->session . '/send-message')->withBody([
 //            'phone' => $serializedId,
