@@ -13,6 +13,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use WPPConnectTeam\Wppconnect\Facades\Wppconnect;
 use Illuminate\Support\Facades\Redis;
 
@@ -63,7 +64,7 @@ class SendWhatsappMessagesJob implements ShouldQueue
         $sessionToken = WppconnectToken::where('session_id', $serviceId)->first();
         $messages = Message::where('id', $messageId)->first();
         $phone = WppconnectGroups::where('class_id',$groupId)->first();
-        info($groupId);
+        Log::info($groupId);
         $serializedId = $phone->serialized_id;
         $messagesToSend = $messages->message;
 
