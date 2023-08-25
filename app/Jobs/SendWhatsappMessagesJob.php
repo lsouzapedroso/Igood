@@ -69,36 +69,36 @@ class SendWhatsappMessagesJob implements ShouldQueue
 
         Log::info($serializedId);
 
-//        Wppconnect::make($this->url);
-//        $response = Wppconnect::to('/api/' . $this->session . '/send-message')->withBody([
-//            'phone' => $serializedId,
-//            'message' => $messagesToSend,
-//            'isGroup' => true
-//        ])->withHeaders([
-//            'Content-Type' => 'application/json',
-//            'Authorization' => 'Bearer ' . $sessionToken->token
-//        ])->asJson()->post();
-//        $response = json_decode($response->getBody()->getContents(), true);
-//
-//        if ($message->media == true) {
-//
-//            $imagePath = $message->media;
-//            $imageContent = file_get_contents($imagePath);
-//
-//            if ($imageContent !== false) {
-//                $base64Image = 'data:;base64,' . base64_encode($imageContent);
-//            }
-//
-//            Wppconnect::make($this->url);
-//            $response = Wppconnect::to('/api/' . $this->session . '/send-file-base64')->withBody([
-//                'phone' => $serializedId,
-//                'base64' => $base64Image,
-//                'isGroup' => true
-//            ])->withHeaders([
-//                'Content-Type' => 'application/json',
-//                'Authorization' => 'Bearer ' . $sessionToken->token
-//            ])->asJson()->post();
-//            $response = json_decode($response->getBody()->getContents(), true);
-//        }
+        Wppconnect::make($this->url);
+        $response = Wppconnect::to('/api/' . $this->session . '/send-message')->withBody([
+            'phone' => $serializedId,
+            'message' => $messagesToSend,
+            'isGroup' => true
+        ])->withHeaders([
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $sessionToken->token
+        ])->asJson()->post();
+        $response = json_decode($response->getBody()->getContents(), true);
+
+        if ($message->media == true) {
+
+            $imagePath = $message->media;
+            $imageContent = file_get_contents($imagePath);
+
+            if ($imageContent !== false) {
+                $base64Image = 'data:;base64,' . base64_encode($imageContent);
+            }
+
+            Wppconnect::make($this->url);
+            $response = Wppconnect::to('/api/' . $this->session . '/send-file-base64')->withBody([
+                'phone' => $serializedId,
+                'base64' => $base64Image,
+                'isGroup' => true
+            ])->withHeaders([
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $sessionToken->token
+            ])->asJson()->post();
+            $response = json_decode($response->getBody()->getContents(), true);
+        }
     }
 }
