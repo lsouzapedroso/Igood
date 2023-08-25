@@ -64,7 +64,7 @@ class SendWhatsappMessagesJob implements ShouldQueue
         $sessionToken = WppconnectToken::where('session_id', $serviceId)->first();
         $messages = Message::where('id', $messageId)->first();
         $phone = WppconnectGroups::where('class_id',$groupId)->first();
-        Log::info($groupId);
+        Log::info($phone);
         $serializedId = $phone->serialized_id;
         $messagesToSend = $messages->message;
 
