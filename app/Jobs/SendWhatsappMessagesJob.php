@@ -64,40 +64,43 @@ class SendWhatsappMessagesJob implements ShouldQueue
         $sessionToken = WppconnectToken::where('session_id', $serviceId)->first();
         $messages = Message::where('id', $messageId)->first();
         $phone = WppconnectGroups::where('id',$groupId)->first();
+        $teste = WppconnectGroups::all();
         Log::info($phone);
-        $serializedId = $phone->serialized_id;
-        $messagesToSend = $messages->message;
-
-        Wppconnect::make($this->url);
-        $response = Wppconnect::to('/api/' . $this->session . '/send-message')->withBody([
-            'phone' => $serializedId,
-            'message' => $messagesToSend,
-            'isGroup' => true
-        ])->withHeaders([
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer ' . $sessionToken->token
-        ])->asJson()->post();
-        $response = json_decode($response->getBody()->getContents(), true);
-
-        if ($message->media == true) {
-
-            $imagePath = $message->media;
-            $imageContent = file_get_contents($imagePath);
-
-            if ($imageContent !== false) {
-                $base64Image = 'data:;base64,' . base64_encode($imageContent);
-            }
-
-            Wppconnect::make($this->url);
-            $response = Wppconnect::to('/api/' . $this->session . '/send-file-base64')->withBody([
-                'phone' => $serializedId,
-                'base64' => $base64Image,
-                'isGroup' => true
-            ])->withHeaders([
-                'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . $sessionToken->token
-            ])->asJson()->post();
-            $response = json_decode($response->getBody()->getContents(), true);
-        }
+        Log::info($messages);
+        Log::info($teste);
+//        $serializedId = $phone->serialized_id;
+//        $messagesToSend = $messages->message;
+//
+//        Wppconnect::make($this->url);
+//        $response = Wppconnect::to('/api/' . $this->session . '/send-message')->withBody([
+//            'phone' => $serializedId,
+//            'message' => $messagesToSend,
+//            'isGroup' => true
+//        ])->withHeaders([
+//            'Content-Type' => 'application/json',
+//            'Authorization' => 'Bearer ' . $sessionToken->token
+//        ])->asJson()->post();
+//        $response = json_decode($response->getBody()->getContents(), true);
+//
+//        if ($message->media == true) {
+//
+//            $imagePath = $message->media;
+//            $imageContent = file_get_contents($imagePath);
+//
+//            if ($imageContent !== false) {
+//                $base64Image = 'data:;base64,' . base64_encode($imageContent);
+//            }
+//
+//            Wppconnect::make($this->url);
+//            $response = Wppconnect::to('/api/' . $this->session . '/send-file-base64')->withBody([
+//                'phone' => $serializedId,
+//                'base64' => $base64Image,
+//                'isGroup' => true
+//            ])->withHeaders([
+//                'Content-Type' => 'application/json',
+//                'Authorization' => 'Bearer ' . $sessionToken->token
+//            ])->asJson()->post();
+//            $response = json_decode($response->getBody()->getContents(), true);
+//        }
     }
 }
