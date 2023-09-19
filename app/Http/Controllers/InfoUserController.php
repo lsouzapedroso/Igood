@@ -15,7 +15,6 @@ class InfoUserController extends Controller
 
     public function create()
     {
-        $child = Child::where('parent_id', '=', (auth()->user()->id))->with('user')-> get();
         return view('user.user-management')->with('child', $child);
     }
 

@@ -18,9 +18,9 @@
                     </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                <input type="text" class="form-control" name="message" value="" style="height: 300px;"placeholder="Mensagem">
+            <div ng-app="textAngularTest" ng-controller="wysiwygeditor" class="container app">
+            <div text-angular="text-angular" name="message" ng-model="htmlcontent" ta-disabled='disabled'style="height: 300px;"placeholder="Mensagem"></div>
+                <div class="d-none" ta-bind="text" ng-model="htmlcontent" ta-readonly='disabled'></div>
             </div>
 
             <div class="form-group">
@@ -41,3 +41,19 @@
         </form>
     </div>
 @endsection
+
+</script>
+    <!-- Angular JS -->
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js'></script>
+    <!-- Angular Sanitize JS -->
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular-sanitize.min.js'></script>
+    <!-- Text Angular JS -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.1.2/textAngular.min.js'></script>
+    <script>
+        angular.module("textAngularTest", ['textAngular']);
+        function wysiwygeditor($scope) {
+            $scope.orightml = '';
+            $scope.htmlcontent = $scope.orightml;
+            $scope.disabled = false;
+        };
+    </script>

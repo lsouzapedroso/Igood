@@ -26,6 +26,7 @@ class GroupsContoller extends Controller
         $Messages = Message::All();
         return view('communication.whatsapp.groups', ['Messages' => $Messages], compact('accessLevel'));
     }
+
     public function edit($id)
     {
         $user = auth()->user();

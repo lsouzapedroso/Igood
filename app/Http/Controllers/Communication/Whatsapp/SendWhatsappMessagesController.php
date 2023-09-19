@@ -19,7 +19,6 @@ class SendWhatsappMessagesController extends Controller
     protected $url;
     protected $key;
     protected $session;
-
     /**
      * Create a new job instance.
      *
@@ -37,7 +36,6 @@ class SendWhatsappMessagesController extends Controller
 
         $service = WppconnectService::where('service_name', $this->session)->first();
         $serviceId = $service->id;
-        $session = WppconnectToken::where('session_id', $service->id)->get();
         $sessionToken = WppconnectToken::where('session_id', $serviceId)->first();
 
         if ($sessionToken == NULL || $sessionToken->init == 0) {
@@ -66,7 +64,7 @@ class SendWhatsappMessagesController extends Controller
                             $data = [
                                 'messageId' => $message_id,
                                 'groupId' => $groupId,
-                                'groupMessageId'=> $groupMessageId
+                                'groupMessageId' => $groupMessageId
                             ];
                             SendWhatsappMessagesJob::dispatch($data);
                             $groupMessage->update(['send' => true]);
@@ -75,6 +73,6 @@ class SendWhatsappMessagesController extends Controller
                 }
             }
         }
-        return redirect()->route ('groups-message');
+        return redirect()->route('groups-message');
     }
 }

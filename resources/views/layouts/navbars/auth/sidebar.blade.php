@@ -40,8 +40,8 @@
             </li>
 
             <li class="nav-item" {{ $accessLevel !=0 ? 'hidden' : '' }}>
-                <a class="nav-link  {{ (Request::is('user-management') ? 'active' : '') }} "
-                   href="{{ url('user-management') }}">
+                <a class="nav-link  {{ (Request::is('register') ? 'active' : '') }} "
+                   href="{{ url('register') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1"
@@ -111,7 +111,7 @@
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link "
-                               href="{{ url('whatsapp-options')}}">
+                               href="{{ url('groups-service')}}">
                                 <span class="sidenav-mini-icon"> UM </span>
                                 <span class="sidenav-normal  ms-2  ps-1"> Grupos Whatsapp <b class="caret"></b></span>
                             </a>

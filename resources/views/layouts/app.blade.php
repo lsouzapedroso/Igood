@@ -1,4 +1,4 @@
-<!--
+ <!--
 =========================================================
 * Soft UI Dashboard - v1.0.3
 =========================================================
@@ -35,6 +35,8 @@
         <title>
             Front Guide CCBEU
         </title>
+        <!-- Font Aweomse 4 CSS -->
+        <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css'>
         <!--     Fonts and icons     -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
         <!-- Nucleo Icons -->
@@ -54,6 +56,8 @@
               href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css"
               integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg=="
               crossorigin="anonymous"/>
+        <!-- Rich Text Editor CSS -->
+        <link rel="stylesheet" href="css/rich-text-editor.css">
 
     </head>
 
@@ -156,7 +160,8 @@
             }
             return true;
         }
-    </script>
+
+
     @endif
 
     <!-- Github buttons -->

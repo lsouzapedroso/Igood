@@ -8,9 +8,11 @@ use App\Http\Controllers\Communication\CommunicationController;
 use App\Http\Controllers\Communication\phonebook\PhonebookController;
 use App\Http\Controllers\Communication\Whatsapp\GroupsContoller;
 use App\Http\Controllers\Communication\Whatsapp\MessagesController;
+use App\Http\Controllers\Communication\Whatsapp\MessagesReceiveController;
 use App\Http\Controllers\Communication\Whatsapp\SendWhatsappMessagesController;
 use App\Http\Controllers\Communication\Whatsapp\WhatsappController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Gpt\GptSessionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\ResetController;
@@ -19,6 +21,7 @@ use App\Http\Controllers\SponteContollers\SponteEmployeesController;
 use App\Http\Controllers\SponteContollers\SponteResponsiblesController;
 use App\Http\Controllers\SponteContollers\SponteStudentsController;
 use App\Http\Controllers\Verificar\SessionsController;
+use App\Http\Controllers\WebhookController;
 use http\Url;
 use Illuminate\Support\Facades\Route;
 
@@ -34,9 +37,9 @@ use Illuminate\Support\Facades\Route;
 */
 Route::group(['middleware' => 'access.level:0'], function () {
 
-    if (env('APP_ENV') === 'production') {
-        URL::forceSchema('https');
-    }
+//    if (env('APP_ENV') === 'production') {
+//        URL::forceSchema('https');
+//    }
 
     Route::get('/dashboard', [DashboardController::class, 'create'])->name('dashboard');
 
@@ -58,11 +61,6 @@ Route::group(['middleware' => 'access.level:0'], function () {
     Route::get('/create-message', [MessagesController::class, 'index'])->name('create-message');
     Route::post('/save-message', [MessagesController::class, 'saveMassage'])->name('save-message');
 
-    Route::get('/whatsapp-options', [WhatsappController::class, 'index'])->name('whatsapp-options');
-    Route::get('/whatsapp-create', [WhatsappController::class, 'create'])->name('whatsapp-create');
-    Route::get('/whatsapp-check', [WhatsappController::class, 'check'])->name('whatsapp-check');
-
-
     Route::get('profile', function () {return view('profile');})->name('profile');
     Route::get('user-management', [InfoUserController::class, 'create'])->name('user-management');
 
@@ -80,6 +78,15 @@ Route::group(['middleware' => 'access.level:0'], function () {
     Route::get('/responsibles', [SponteResponsiblesController::class, 'newSearch']);
     Route::get('/responsibles-store', [SponteResponsiblesController::class, 'store']);
     Route::get('/send-message', [SendWhatsappMessagesController::class, 'send']);
+
+    Route::get('/gpt-service', [GptSessionController::class, 'index'])->name('gpt-service');
+    Route::get('/gpt-check', [GptSessionController::class, 'check'])->name('gpt-check');
+
+    Route::get('/groups-service', [WhatsappController::class, 'index'])->name('groups-service');
+    Route::get('/groups-check', [WhatsappController::class, 'check'])->name('groups-check');
+
+
+
 });
 
 Route::group(['middleware' => 'access.level:1'], function () {
@@ -120,6 +127,7 @@ Route::group(['middleware' => 'guest'], function () {
 
 });
 
+Route::post('/webhook', [WebhookController::class ,'webhookHandler']);
 
 Route::group(['middleware' => 'auth'], function () {
     //EXCLUIR

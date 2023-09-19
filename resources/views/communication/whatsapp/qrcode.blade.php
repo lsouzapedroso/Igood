@@ -17,7 +17,7 @@
                 class="btn bg-gradient-primary">Novo Qrcode
             </a>
         <a
-            href="{{ url('whatsapp-check')}}"
+            href="{{ url('groups-check')}}"
             type="button"
             class="btn bg-gradient-primary">Ok
         </a>

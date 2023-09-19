@@ -30,7 +30,7 @@ class SendWhatsappMessagesJob implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param string $messageId
+     * @param string $data
      * @return void
      */
     public function __construct($data)
@@ -55,19 +55,15 @@ class SendWhatsappMessagesJob implements ShouldQueue
         $groupId = $this->data['groupId'];
         $groupMessageId = $this->data['groupMessageId'];
 
-        $groupMessage = GroupMessage::where('id', $groupMessageId)->first();
-
         $message = Message::findOrFail($messageId);
         $service = WppconnectService::where('service_name', $this->session)->first();
         $serviceId = $service->id;
-        $session = WppconnectToken::where('session_id', $service->id)->get();
         $sessionToken = WppconnectToken::where('session_id', $serviceId)->first();
         $messages = Message::where('id', $messageId)->first();
         $phone = WppconnectGroups::where('id',$groupId)->first();
         $serializedId = $phone->serialized_id;
         $messagesToSend = $messages->message;
 
-        Log::info($serializedId);
 
         Wppconnect::make($this->url);
         $response = Wppconnect::to('/api/' . $this->session . '/send-message')->withBody([
