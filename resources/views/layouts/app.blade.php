@@ -83,8 +83,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-zMP7rVo3TZD+6t9qABJ6/AU6PuglVmeQCGxqBXc4NYMSXYuacSNn3zZkQDgIpnZ" crossorigin="anonymous"></script>
 
     <script>
         console.log("Antes de inicializar o datetimepicker");
@@ -120,13 +120,15 @@
 
         });
     </script>
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
-    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="../assets/js/plugins/fullcalendar.min.js"></script>
-    <script src="../assets/js/plugins/chartjs.min.js"></script>
-    @stack('rtl')
+
+{{--VERIFICARRRRRRRR--}}
+{{--    <script src="../assets/js/core/popper.min.js"></script>--}}
+{{--    <script src="../assets/js/core/bootstrap.min.js"></script>--}}
+{{--    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>--}}
+{{--    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>--}}
+{{--    <script src="../assets/js/plugins/fullcalendar.min.js"></script>--}}
+{{--    <script src="../assets/js/plugins/chartjs.min.js"></script>--}}
+
     @stack('dashboard')
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
@@ -160,15 +162,169 @@
             }
             return true;
         }
-
-
     @endif
-
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
-    </body>
 
+    <script>
+        $(document).ready(function () {
+            $('#parent').change(function () {
+                if ($(this).val() === 'Para mim') {
+                    $('#childNamesField').show();
+                } else {
+                    $('#childNamesField').hide();
+                }
+            });
+        });
+    </script>
+    <script>
+        function formatPhoneNumber(input) {
+            // Remove todos os caracteres não numéricos
+            var phoneNumber = input.value.replace(/\D/g, '');
+
+            // Formata o número de telefone com parênteses e espaços
+            if (phoneNumber.length >= 10) {
+                phoneNumber = '(' + phoneNumber.substr(0, 2) + ') ' + phoneNumber.substr(2, 5) + '-' + phoneNumber.substr(7, 4);
+            } else if (phoneNumber.length >= 6) {
+                phoneNumber = '(' + phoneNumber.substr(0, 2) + ') ' + phoneNumber.substr(2, 4) + '-' + phoneNumber.substr(6, 4);
+            } else if (phoneNumber.length >= 2) {
+                phoneNumber = '(' + phoneNumber.substr(0, 2) + ') ' + phoneNumber.substr(2);
+            } else if (phoneNumber.length === 0) {
+                phoneNumber = ''; // Define como uma string vazia se estiver vazio
+            }
+
+            // Define o valor formatado no campo de entrada
+            input.value = phoneNumber;
+        }
+
+        function handleBackspace(event) {
+            if (event.key === 'Backspace') {
+                var phoneInput = document.getElementById('phone');
+                var cursorPosition = phoneInput.selectionStart;
+                var phoneNumber = phoneInput.value;
+
+                // Remove os parênteses e o traço se o cursor estiver posicionado neles
+                if (phoneNumber.charAt(cursorPosition - 1) === '-' || phoneNumber.charAt(cursorPosition - 1) === ')' || phoneNumber.charAt(cursorPosition - 1) === '(') {
+                    phoneInput.value = phoneNumber.slice(0, cursorPosition - 1) + phoneNumber.slice(cursorPosition);
+                    cursorPosition--;
+                    phoneInput.selectionStart = cursorPosition;
+                    phoneInput.selectionEnd = cursorPosition;
+                    formatPhoneNumber(phoneInput);
+                }
+            }
+        }
+    </script>
+
+    <script>
+        document.getElementById('parent').addEventListener('change', function () {
+            var childNamesContainer = document.getElementById('childNamesContainer');
+            var addChildButton = document.getElementById('addChildButton');
+
+
+            if (this.value === '1') {
+                childNamesContainer.style.display = 'block';
+                addChildButton.style.display = 'block';
+            } else {
+                childNamesContainer.style.display = 'none';
+                addChildButton.style.display = 'none';
+            }
+        });
+
+        document.getElementById('addChildButton').addEventListener('click', function () {
+            var childNamesContainer = document.getElementById('childNamesContainer');
+            var newChild = document.querySelector('.child-name').cloneNode(true);
+
+            // Limpa o valor do campo clonado
+            newChild.querySelector('.child-name-input').value = '';
+
+            childNamesContainer.appendChild(newChild);
+
+            // Adicione um ouvinte de evento para o novo campo de "Nome Completo"
+            var newChildInput = newChild.querySelector('.child-name-input');
+            newChildInput.addEventListener('input', handleChildNameInputChange);
+        });
+
+        // Função para lidar com a entrada no campo "Nome Completo"
+        function handleChildNameInputChange() {
+            // Verifica se o campo está vazio
+            if (this.value.trim() === '') {
+                // Remove o campo vazio
+                var childNamesContainer = document.getElementById('childNamesContainer');
+                var childNameInput = this.closest('.child-name');
+                childNamesContainer.removeChild(childNameInput);
+            }
+        }
+    </script>
+
+    <script>
+        // Obtém o campo de entrada de CPF
+        var cpfInput = document.querySelector('.cpf-input');
+
+        // Adiciona um ouvinte de evento para formatar o CPF enquanto o usuário digita
+        cpfInput.addEventListener('input', function () {
+            // Remove qualquer caractere que não seja número
+            var cleanedValue = this.value.replace(/\D/g, '');
+
+            // Verifica se o valor está vazio
+            if (cleanedValue === '') {
+                this.value = '';
+                return;
+            }
+
+            // Formata o CPF
+            var formattedValue = cleanedValue.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+
+            // Define o valor formatado no campo de entrada
+            this.value = formattedValue;
+        });
+    </script>
+    <script>
+        function validateForm() {
+            var nameField = document.getElementById('name');
+            var cpfField = document.getElementById('cpf');
+            var cpfErrorMessage = document.getElementById('cpfErrorMessage');
+
+            // Verifique se o campo Nome Completo está preenchido
+            if (nameField.value.trim() === '') {
+                alert('Por favor, preencha o campo Nome Completo.');
+                nameField.focus();
+                return false;
+            }
+
+            // Verifique se o CPF está no formato correto
+            var cpfPattern = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+            if (!cpfPattern.test(cpfField.value)) {
+                cpfErrorMessage.style.display = 'block';
+                cpfField.focus();
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.dropdown-item').on('click', function (e) {
+                e.preventDefault();
+
+                // Atualizar o texto do botão dropdown com o novo status
+                $('#statusDropdown').text($(this).text());
+            });
+        });
+    </script>
+    <script>
+        function updateStatus(status) {
+            // Atualiza o valor do campo oculto com o status selecionado
+            document.getElementById('selectedStatus').value = status;
+            // Submete automaticamente o formulário quando um status é selecionado no dropdown
+            //document.getElementById('updateStatusForm').submit();
+        }
+    </script>
+
+
+    </body>
     </html>
 

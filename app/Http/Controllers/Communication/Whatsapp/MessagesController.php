@@ -36,8 +36,6 @@ class MessagesController extends Controller
 
     public function store(Request $request)
     {
-        // Valide os dados do formulário, se necessário
-
         $data = [
             'name' => $request->input('name'),
             'day_time' => $request->input('day_time'),

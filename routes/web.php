@@ -15,14 +15,19 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Gpt\GptSessionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
+use App\Http\Controllers\ReEnrolling\ContractsController;
+use App\Http\Controllers\ReEnrolling\ReEnrollingContactsController;
+use App\Http\Controllers\ReEnrolling\ReEnrollingController;
+use App\Http\Controllers\ReEnrolling\StatusController;
 use App\Http\Controllers\ResetController;
+use App\Http\Controllers\Responsables\ResponsablesController;
 use App\Http\Controllers\SponteContollers\SponteClassesController;
 use App\Http\Controllers\SponteContollers\SponteEmployeesController;
 use App\Http\Controllers\SponteContollers\SponteResponsiblesController;
 use App\Http\Controllers\SponteContollers\SponteStudentsController;
+use App\Http\Controllers\Students\StudentsController;
 use App\Http\Controllers\Verificar\SessionsController;
 use App\Http\Controllers\WebhookController;
-use http\Url;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -85,6 +90,25 @@ Route::group(['middleware' => 'access.level:0'], function () {
     Route::get('/groups-service', [WhatsappController::class, 'index'])->name('groups-service');
     Route::get('/groups-check', [WhatsappController::class, 'check'])->name('groups-check');
 
+    Route::get('/re-enrolling/dashboard', [ReEnrollingController::class, 'dashboard'])->name('re-enrolling/dashboard');
+    Route::get('/re-enrolling', [ReEnrollingController::class, 'index'])->name('re-enrolling.index');
+    Route::get('/re-enrolling/{contrato}', [ReEnrollingController::class, 'show'])->name('re-enrolling.show');
+    Route::put('re-enrolling/{student}/update-status', [ReEnrollingController::class, 'updateStatus'])->name('re-enrolling.updateStatus');
+
+    Route::get('/controles', [ReEnrollingController::class, 'controlIndex'])->name('controles');
+
+    Route::get('/status', [StatusController::class, 'statusIndex'])->name('status');
+    Route::get('/new-status', [StatusController::class, 'statusNew'])->name('/re-enrolling/new-status');
+    Route::post('/create-status', [StatusController::class, 'createStatus'])->name('/re-enrolling/create-status');
+
+    Route::get('/verificar-alunos', [StudentsController::class, 'verifiedContract'])->name('/re-enrolling/verificar-alunos');
+
+
+    Route::get('/contracts', [ContractsController::class, 'index'])->name('contracts');
+
+    Route::get('/responsables', [ResponsablesController::class, 'index'])->name('Responsables');
+    Route::get('/students', [StudentsController::class, 'index'])->name('students');
+
 
 
 });
@@ -126,6 +150,10 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 
 });
+
+
+Route::post('/rematriculasSave', [ReEnrollingContactsController::class ,'save'])->name('rematriculasSave');
+Route::get('/rematriculas', [ReEnrollingContactsController::class ,'index'])->name('rematriculas');
 
 Route::post('/webhook', [WebhookController::class ,'webhookHandler']);
 

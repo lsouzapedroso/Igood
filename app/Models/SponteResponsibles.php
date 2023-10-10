@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class SponteResponsibles extends Model
 {
+
+    protected $primaryKey = 'responsible_id';
+
     use HasFactory;
 
     protected $fillable = [
