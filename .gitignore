@@ -2,6 +2,12 @@
 /public/build
 /public/hot
 /public/storage
+/public/assets
+/public/css
+/public/documentation
+/public/fonts
+/public/images
+/public/media
 /storage/*.key
 /vendor
 .env
@@ -15,6 +21,5 @@ yarn-error.log
 /.vscode
 *.pdf
 *.png
-*.png
-public/output.png
-public/output.png
+/public/output.png
+
