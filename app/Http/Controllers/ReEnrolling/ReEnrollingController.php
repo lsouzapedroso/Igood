@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ReEnrolling;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Wppconnect\CreateSessionController;
 use App\Models\ClassMember;
+use App\Models\Classe;
 use App\Models\ContratoSponte;
 use App\Models\ReEnrolling;
 use App\Models\ReEnrollingStatus;
@@ -71,25 +72,28 @@ class ReEnrollingController extends Controller
 
         $studentInfo = SponteStudent::where('name', $student)->first();
 
+
+
         if ($studentInfo) {
             $responsables = ResponsibleStudents::where('student_id', $studentInfo->student_id)->get();
-            $atualClasse = ClassMember::where('student_id', $studentInfo->student_id)->get();
+
+            $contrato = ContratoSponte::where('Aluno', $student)->first();
+            $atualClasse = $contrato->Estagio;
+
+            $classeInstance = Classe::where('name', $atualClasse)->first();
+            $nextClassInstance = $classeInstance->nextClass;
+            $nextClass = $nextClassInstance->name;
 
             $status = ReEnrolling::where('sponte_student_id', $studentInfo->student_id)
                 ->leftJoin('re_enrolling_status', 're_enrolling.status_id', '=', 're_enrolling_status.id')
                 ->pluck('re_enrolling_status.status')
                 ->first();
 
-
-
-//            $status = SponteClasses::where('sponte_student_id', $studentInfo->student_id)
-//                ->leftJoin('re_enrolling_status', 're_enrolling.status_id', '=', 're_enrolling_status.id')
-//                ->pluck('re_enrolling_status.status')
-//                ->first();
-
             $data['student'] = $studentInfo->toArray();
             $data['status'] = $status;
             $data['responsables'] = [];
+            $data['atualClasse'] = $atualClasse;
+            $data['nextClasse'] = $nextClass;
 
             foreach ($responsables as $responsibleStudent) {
                 $responsibleDetails = SponteResponsibles::find($responsibleStudent->responsible_id);
@@ -97,6 +101,7 @@ class ReEnrollingController extends Controller
                     $data['responsables'][] = $responsibleDetails->toArray();
                 }
             }
+
         } else {
             abort(404);
         }

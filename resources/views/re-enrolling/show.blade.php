@@ -46,6 +46,26 @@
                     @endif
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Classe Atual</h4>
+                    <p>Nome da Classe: {{ $data['atualClasse']}}</p>
+                    <!-- Add other properties as needed -->
+                </div>
+
+                <div class="col-md-4">
+                    <h4>Próxima Classe</h4>
+                    @if (!empty($data['nextClasse']))
+                        <p>Nome da Classe: {{ $data['nextClasse'] }}</p>
+                        <!-- Add other properties as needed -->
+                    @else
+                        <p>Não há próxima classe cadastrada para este aluno.</p>
+                    @endif
+                </div>
+            </div>
+
+
         </div>
     </div>
 
