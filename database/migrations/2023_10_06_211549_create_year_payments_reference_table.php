@@ -13,16 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('courses_values', function (Blueprint $table) {
+        Schema::create('year_payments_reference', function (Blueprint $table) {
             $table->id();
-            $table->string('level');
-            $table->float('cheque_anual');
-            $table->float('credit_card');
-            $table->float('anual_escola');
-            $table->float('material_sem_desconto');
-            $table->float('material_com_desconto');
-            $table->float('registration_tax');
-            $table->float('grow_global');
+            $table->string('name');
             $table->year('year');
             $table->boolean('active');
             $table->timestamps();
@@ -36,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courses_values');
+        Schema::dropIfExists('year_payments_reference');
     }
 };
