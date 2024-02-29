@@ -102,7 +102,7 @@ services:
             - sail
 networks:
     sail:
-        driver: bridge
+        name: sail
 volumes:
     sail-mysql:
         driver: local
