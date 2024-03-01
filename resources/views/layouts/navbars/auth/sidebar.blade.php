@@ -5,9 +5,9 @@
            aria-hidden="true" id="iconSidenav"></i>
         <a class="align-items-center d-flex m-0 navbar-brand text-wrap" href="{{ route('dashboard') }}">
             <img
-                src="https://play-lh.googleusercontent.com/nzy1nniRsoljcD5v4dsSVFQCcrGSrYDIu8yfKOC7CxaLNyVs3xk3a-HHWX4t0LiuS1KD"
+                src="https://lh3.googleusercontent.com/drive-viewer/AKGpihabfytjKi5qTV62t9E1gjd3t8KXntD1mxxihN4kp1aC0T2z-mGiiDazO8kg1CXZvz-tiHQxfIRBGM6Alaso04QovO-9Nw=w1366-h607"
                 class="navbar-brand-img h-100" alt="...">
-            <span class="ms-3 font-weight-bold">Front Guide CCBEU</span>
+            <span class="ms-3 font-weight-bold">Igood</span>
         </a>
     </div>
 

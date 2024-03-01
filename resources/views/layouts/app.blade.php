@@ -31,9 +31,9 @@
 
         <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
         <link rel="icon" type="image/png"
-              href="https://play-lh.googleusercontent.com/nzy1nniRsoljcD5v4dsSVFQCcrGSrYDIu8yfKOC7CxaLNyVs3xk3a-HHWX4t0LiuS1KD">
+              href="https://lh3.googleusercontent.com/drive-viewer/AKGpihabfytjKi5qTV62t9E1gjd3t8KXntD1mxxihN4kp1aC0T2z-mGiiDazO8kg1CXZvz-tiHQxfIRBGM6Alaso04QovO-9Nw=w1366-h607">
         <title>
-            Front Guide CCBEU
+            Igood
         </title>
         <!-- Font Aweomse 4 CSS -->
         <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css'>
